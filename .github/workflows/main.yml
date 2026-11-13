@@ -1,0 +1,26 @@
+name: Meri Pehli CI-CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code Checkout Karo
+        uses: actions/checkout@v4
+
+      - name: CI Test - File Check
+        run: |
+          echo "Checking files..."
+          ls -la
+          grep "Version" index.html
+          echo "Test Pass Ho Gaya! Code bilkul sahi hai."
+
+      - name: CD Deploy - Live Server par Bhejna
+        run: |
+          echo "Deploying website to server..."
+          sleep 3
+          echo "Boom! Website Live Ho Gayi!"
