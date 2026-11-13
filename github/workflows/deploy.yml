@@ -1,0 +1,30 @@
+name: Meri Pehli CI-CD Pipeline
+
+# Jab bhi main branch par code push hoga, yeh pipeline chalegi
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest   # GitHub tumhe ek free Linux machine dega
+
+    steps:
+      # Step 1: Tumhara code machine par laana
+      - name: Code Checkout Karo
+        uses: actions/checkout@v4
+
+      # Step 2: CI - Test karna ki index.html sahi hai ya nahi
+      - name: CI Test - File Check
+        run: |
+          echo "Checking files..."
+          ls -la
+          grep "Version" index.html
+          echo "Test Pass Ho Gaya! Code bilkul sahi hai."
+
+      # Step 3: CD - Deploy simulate karna
+      - name: CD Deploy - Live Server par Bhejna
+        run: |
+          echo "Deploying website to server..."
+          sleep 3
+          echo "Boom! Website Live Ho Gayi!"
